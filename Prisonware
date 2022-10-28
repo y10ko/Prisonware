@@ -1,0 +1,651 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("PrisonWare", "DarkTheme")
+local Tab = Window:NewTab("Info")
+local Section = Tab:NewSection("Made by $ yk#1126")
+local Section = Tab:NewSection("https://discord.gg/VcWCw4XScW")
+local Tab = Window:NewTab("Commands")
+local Section = Tab:NewSection("Commands for Prisonlife")
+Section:NewButton("Infinite Yeld", "Launches Infinite Yeld Commands", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+Section:NewButton("Admin Commands", "Launches Admin", function()
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/XTheMasterX/Scripts/Main/PrisonLife'),true))()
+end)
+
+local Tab = Window:NewTab("Aiming")
+local Section = Tab:NewSection("Aimbot/Silent")
+
+Section:NewButton("Silent Aim GUI", "Launches Silent Aim GUI", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/VG19is1Q",true))()
+end)
+
+Section:NewButton("Aimbot", "Launches right Click Aimbot", function()
+    
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local LocalPlayer = Players.LocalPlayer
+local Holding = false
+
+_G.AimbotEnabled = true
+_G.TeamCheck = true -- If set to true then the script would only lock your aim at enemy team members.
+_G.AimPart = "Torso" -- Where the aimbot script would lock at.
+_G.Sensitivity = 0 -- How many seconds it takes for the aimbot script to officially lock onto the target's aimpart.
+
+local function GetClosestPlayer()
+	local MaximumDistance = math.huge
+	local Target = nil
+  
+  	coroutine.wrap(function()
+    		wait(20); MaximumDistance = math.huge -- Reset the MaximumDistance so that the Aimbot doesn't remember it as a very small variable and stop capturing players...
+  	end)()
+
+	for _, v in next, Players:GetPlayers() do
+		if v.Name ~= LocalPlayer.Name then
+			if _G.TeamCheck == true then
+				if v.Team ~= LocalPlayer.Team then
+					if v.Character ~= nil then
+						if v.Character:FindFirstChild("HumanoidRootPart") ~= nil then
+							if v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("Humanoid").Health ~= 0 then
+								local ScreenPoint = Camera:WorldToScreenPoint(v.Character:WaitForChild("HumanoidRootPart", math.huge).Position)
+								local VectorDistance = (Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y) - Vector2.new(ScreenPoint.X, ScreenPoint.Y)).Magnitude
+								
+								if VectorDistance < MaximumDistance then
+									Target = v
+                  							MaximumDistance = VectorDistance
+								end
+							end
+						end
+					end
+				end
+			else
+				if v.Character ~= nil then
+					if v.Character:FindFirstChild("HumanoidRootPart") ~= nil then
+						if v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("Humanoid").Health ~= 0 then
+							local ScreenPoint = Camera:WorldToScreenPoint(v.Character:WaitForChild("HumanoidRootPart", math.huge).Position)
+							local VectorDistance = (Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y) - Vector2.new(ScreenPoint.X, ScreenPoint.Y)).Magnitude
+							
+							if VectorDistance < MaximumDistance then
+								Target = v
+               							MaximumDistance = VectorDistance
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+
+	return Target
+end
+
+UserInputService.InputBegan:Connect(function(Input)
+    if Input.UserInputType == Enum.UserInputType.MouseButton2 then
+        Holding = true
+    end
+end)
+
+UserInputService.InputEnded:Connect(function(Input)
+    if Input.UserInputType == Enum.UserInputType.MouseButton2 then
+        Holding = false
+    end
+end)
+
+RunService.RenderStepped:Connect(function()
+    if Holding == true and _G.AimbotEnabled == true then
+        TweenService:Create(Camera, TweenInfo.new(_G.Sensitivity, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(Camera.CFrame.Position, GetClosestPlayer().Character[_G.AimPart].Position)}):Play()
+    end
+end)
+end)
+
+local Tab = Window:NewTab("GUI")
+local Section = Tab:NewSection("GUI")
+Section:NewButton("Prison life Menu/GUI Launcher", "Menu/GUI Launcher", function()
+    -- Gui to Lua
+-- Version: 3.2
+ 
+-- Instances:
+ 
+local RoPrison = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local BecomeCrim = Instance.new("TextButton")
+local UICorner_2 = Instance.new("UICorner")
+local RemoveDoors = Instance.new("TextButton")
+local UICorner_3 = Instance.new("UICorner")
+local BringWeapons = Instance.new("TextButton")
+local UICorner_4 = Instance.new("UICorner")
+local BringKeyCard = Instance.new("TextButton")
+local UICorner_5 = Instance.new("UICorner")
+local PrisonBreaker = Instance.new("TextButton")
+local UICorner_6 = Instance.new("UICorner")
+local TitleFrame = Instance.new("Frame")
+local UICorner_7 = Instance.new("UICorner")
+local Logo = Instance.new("TextLabel")
+local Title = Instance.new("TextLabel")
+local Exit = Instance.new("TextButton")
+local UICorner_8 = Instance.new("UICorner")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+local Aimbot = Instance.new("TextButton")
+local UICorner_9 = Instance.new("UICorner")
+local DexExplorer = Instance.new("TextButton")
+local UICorner_10 = Instance.new("UICorner")
+local RemoteSpy = Instance.new("TextButton")
+local UICorner_11 = Instance.new("UICorner")
+local AddWalkSpeed = Instance.new("TextButton")
+local UICorner_12 = Instance.new("UICorner")
+local TakeWalkSpeed = Instance.new("TextButton")
+local UICorner_13 = Instance.new("UICorner")
+local Open = Instance.new("TextButton")
+local UICorner_14 = Instance.new("UICorner")
+local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
+ 
+--Properties:
+ 
+RoPrison.Name = "RoPrison"
+RoPrison.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+RoPrison.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ 
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = RoPrison
+MainFrame.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+MainFrame.Position = UDim2.new(0.289379835, 0, 0.293822974, 0)
+MainFrame.Size = UDim2.new(0, 433, 0, 246)
+ 
+UICorner.CornerRadius = UDim.new(0, 4)
+UICorner.Parent = MainFrame
+ 
+BecomeCrim.Name = "BecomeCrim"
+BecomeCrim.Parent = MainFrame
+BecomeCrim.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+BecomeCrim.Position = UDim2.new(0.0161662754, 0, 0.215447128, 0)
+BecomeCrim.Size = UDim2.new(0, 134, 0, 51)
+BecomeCrim.Font = Enum.Font.SourceSansLight
+BecomeCrim.Text = "Become A Criminal"
+BecomeCrim.TextColor3 = Color3.fromRGB(255, 255, 255)
+BecomeCrim.TextScaled = true
+BecomeCrim.TextSize = 14.000
+BecomeCrim.TextWrapped = true
+ 
+UICorner_2.Parent = BecomeCrim
+ 
+RemoveDoors.Name = "RemoveDoors"
+RemoveDoors.Parent = MainFrame
+RemoveDoors.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+RemoveDoors.Position = UDim2.new(0.0161662828, 0, 0.451219589, 0)
+RemoveDoors.Size = UDim2.new(0, 134, 0, 51)
+RemoveDoors.Font = Enum.Font.SourceSansLight
+RemoveDoors.Text = "Remove Doors"
+RemoveDoors.TextColor3 = Color3.fromRGB(255, 255, 255)
+RemoveDoors.TextScaled = true
+RemoveDoors.TextSize = 14.000
+RemoveDoors.TextWrapped = true
+ 
+UICorner_3.Parent = RemoveDoors
+ 
+BringWeapons.Name = "BringWeapons"
+BringWeapons.Parent = MainFrame
+BringWeapons.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+BringWeapons.Position = UDim2.new(0.341801405, 0, 0.219512165, 0)
+BringWeapons.Size = UDim2.new(0, 134, 0, 51)
+BringWeapons.Font = Enum.Font.SourceSansLight
+BringWeapons.Text = "Bring Weapon Givers"
+BringWeapons.TextColor3 = Color3.fromRGB(255, 255, 255)
+BringWeapons.TextScaled = true
+BringWeapons.TextSize = 14.000
+BringWeapons.TextWrapped = true
+ 
+UICorner_4.Parent = BringWeapons
+ 
+BringKeyCard.Name = "Bring KeyCard"
+BringKeyCard.Parent = MainFrame
+BringKeyCard.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+BringKeyCard.Position = UDim2.new(0.341801405, 0, 0.455284625, 0)
+BringKeyCard.Size = UDim2.new(0, 134, 0, 51)
+BringKeyCard.Font = Enum.Font.SourceSansLight
+BringKeyCard.Text = "Bring Key Card"
+BringKeyCard.TextColor3 = Color3.fromRGB(255, 255, 255)
+BringKeyCard.TextScaled = true
+BringKeyCard.TextSize = 14.000
+BringKeyCard.TextWrapped = true
+ 
+UICorner_5.Parent = BringKeyCard
+ 
+PrisonBreaker.Name = "PrisonBreaker"
+PrisonBreaker.Parent = MainFrame
+PrisonBreaker.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+PrisonBreaker.Position = UDim2.new(0.341801405, 0, 0.68699199, 0)
+PrisonBreaker.Size = UDim2.new(0, 134, 0, 51)
+PrisonBreaker.Font = Enum.Font.SourceSansLight
+PrisonBreaker.Text = "Prison Breaker"
+PrisonBreaker.TextColor3 = Color3.fromRGB(255, 255, 255)
+PrisonBreaker.TextScaled = true
+PrisonBreaker.TextSize = 14.000
+PrisonBreaker.TextWrapped = true
+ 
+UICorner_6.Parent = PrisonBreaker
+ 
+TitleFrame.Name = "TitleFrame"
+TitleFrame.Parent = MainFrame
+TitleFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+TitleFrame.Position = UDim2.new(-0.0012372667, 0, -0.00294530392, 0)
+TitleFrame.Size = UDim2.new(0, 433, 0, 32)
+ 
+UICorner_7.CornerRadius = UDim.new(0, 4)
+UICorner_7.Parent = TitleFrame
+ 
+Logo.Name = "Logo"
+Logo.Parent = TitleFrame
+Logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Logo.BackgroundTransparency = 1.000
+Logo.Size = UDim2.new(0, 44, 0, 32)
+Logo.Font = Enum.Font.SourceSansLight
+Logo.Text = "RS"
+Logo.TextColor3 = Color3.fromRGB(255, 255, 255)
+Logo.TextScaled = true
+Logo.TextSize = 14.000
+Logo.TextWrapped = true
+ 
+Title.Name = "Title"
+Title.Parent = TitleFrame
+Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Title.BackgroundTransparency = 1.000
+Title.Position = UDim2.new(0.219399571, 0, 0, 0)
+Title.Size = UDim2.new(0, 240, 0, 32)
+Title.Font = Enum.Font.SourceSansLight
+Title.Text = "RoPrison 1.0.0"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextScaled = true
+Title.TextSize = 14.000
+Title.TextWrapped = true
+ 
+Exit.Name = "Exit"
+Exit.Parent = TitleFrame
+Exit.BackgroundColor3 = Color3.fromRGB(117, 0, 0)
+Exit.Position = UDim2.new(0.905311763, 0, 0.09375, 0)
+Exit.Size = UDim2.new(0, 35, 0, 26)
+Exit.Font = Enum.Font.SourceSans
+Exit.Text = "X"
+Exit.TextColor3 = Color3.fromRGB(255, 255, 255)
+Exit.TextScaled = true
+Exit.TextSize = 14.000
+Exit.TextWrapped = true
+ 
+UICorner_8.Parent = Exit
+ 
+UIAspectRatioConstraint.Parent = MainFrame
+UIAspectRatioConstraint.AspectRatio = 1.760
+ 
+Aimbot.Name = "Aimbot"
+Aimbot.Parent = MainFrame
+Aimbot.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+Aimbot.Position = UDim2.new(0.0161662828, 0, 0.68699193, 0)
+Aimbot.Size = UDim2.new(0, 134, 0, 51)
+Aimbot.Font = Enum.Font.SourceSansLight
+Aimbot.Text = "Aimbot"
+Aimbot.TextColor3 = Color3.fromRGB(255, 255, 255)
+Aimbot.TextScaled = true
+Aimbot.TextSize = 14.000
+Aimbot.TextWrapped = true
+ 
+UICorner_9.Parent = Aimbot
+ 
+DexExplorer.Name = "DexExplorer"
+DexExplorer.Parent = MainFrame
+DexExplorer.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+DexExplorer.Position = UDim2.new(0.674364924, 0, 0.219512165, 0)
+DexExplorer.Size = UDim2.new(0, 134, 0, 51)
+DexExplorer.Font = Enum.Font.SourceSansLight
+DexExplorer.Text = "Dex Explorer"
+DexExplorer.TextColor3 = Color3.fromRGB(255, 255, 255)
+DexExplorer.TextScaled = true
+DexExplorer.TextSize = 14.000
+DexExplorer.TextWrapped = true
+ 
+UICorner_10.Parent = DexExplorer
+ 
+RemoteSpy.Name = "RemoteSpy"
+RemoteSpy.Parent = MainFrame
+RemoteSpy.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+RemoteSpy.Position = UDim2.new(0.674364924, 0, 0.455284625, 0)
+RemoteSpy.Size = UDim2.new(0, 134, 0, 51)
+RemoteSpy.Font = Enum.Font.SourceSansLight
+RemoteSpy.Text = "Remote Spy"
+RemoteSpy.TextColor3 = Color3.fromRGB(255, 255, 255)
+RemoteSpy.TextScaled = true
+RemoteSpy.TextSize = 14.000
+RemoteSpy.TextWrapped = true
+ 
+UICorner_11.Parent = RemoteSpy
+ 
+AddWalkSpeed.Name = "AddWalkSpeed"
+AddWalkSpeed.Parent = MainFrame
+AddWalkSpeed.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+AddWalkSpeed.Position = UDim2.new(0.674364924, 0, 0.68699199, 0)
+AddWalkSpeed.Size = UDim2.new(0, 134, 0, 26)
+AddWalkSpeed.Font = Enum.Font.SourceSansLight
+AddWalkSpeed.Text = "+100 Walkspeed"
+AddWalkSpeed.TextColor3 = Color3.fromRGB(255, 255, 255)
+AddWalkSpeed.TextScaled = true
+AddWalkSpeed.TextSize = 14.000
+AddWalkSpeed.TextWrapped = true
+ 
+UICorner_12.Parent = AddWalkSpeed
+ 
+TakeWalkSpeed.Name = "TakeWalkSpeed"
+TakeWalkSpeed.Parent = MainFrame
+TakeWalkSpeed.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+TakeWalkSpeed.Position = UDim2.new(0.674364924, 0, 0.784552932, 0)
+TakeWalkSpeed.Size = UDim2.new(0, 134, 0, 26)
+TakeWalkSpeed.Font = Enum.Font.SourceSansLight
+TakeWalkSpeed.Text = "-100 Walkspeed"
+TakeWalkSpeed.TextColor3 = Color3.fromRGB(255, 255, 255)
+TakeWalkSpeed.TextScaled = true
+TakeWalkSpeed.TextSize = 14.000
+TakeWalkSpeed.TextWrapped = true
+ 
+UICorner_13.Parent = TakeWalkSpeed
+ 
+Open.Name = "Open"
+Open.Parent = RoPrison
+Open.BackgroundColor3 = Color3.fromRGB(65, 130, 0)
+Open.Position = UDim2.new(0, 0, 0.946577668, 0)
+Open.Size = UDim2.new(0, 37, 0, 32)
+Open.Font = Enum.Font.SourceSans
+Open.Text = ">"
+Open.TextColor3 = Color3.fromRGB(255, 255, 255)
+Open.TextScaled = true
+Open.TextSize = 14.000
+Open.TextWrapped = true
+ 
+UICorner_14.Parent = Open
+ 
+UIAspectRatioConstraint_2.Parent = Open
+UIAspectRatioConstraint_2.AspectRatio = 1.156
+ 
+UIAspectRatioConstraint_3.Parent = RoPrison
+UIAspectRatioConstraint_3.AspectRatio = 1.723
+ 
+-- Scripts:
+ 
+local function NXFRUUH_fake_script() -- BecomeCrim.LocalScript 
+    local script = Instance.new('LocalScript', BecomeCrim)
+ 
+    local button = script.Parent
+    
+    button.MouseButton1Click:Connect(function()
+        local plr = game.Players.LocalPlayer
+    
+        if plr.Character then
+            plr.Character:MoveTo(game.Workspace["Criminals Spawn"]:FindFirstChild("SpawnLocation").Position) 
+        end
+    end)
+    
+    
+end
+coroutine.wrap(NXFRUUH_fake_script)()
+local function RRWME_fake_script() -- RemoveDoors.LocalScript 
+    local script = Instance.new('LocalScript', RemoveDoors)
+ 
+    local button = script.Parent.MouseButton1Click:Connect(function()
+        game.Workspace.Prison_Fences:Destroy()
+        game.Workspace.Prison_Cellblock.doors:Destroy()
+        game.Workspace.Doors:Destroy()
+    end)
+end
+coroutine.wrap(RRWME_fake_script)()
+local function AKEAFS_fake_script() -- BringWeapons.LocalScript 
+    local script = Instance.new('LocalScript', BringWeapons)
+ 
+    local button = script.Parent
+    
+    button.MouseButton1Click:Connect(function()
+        local guns = {"Remington 870", "AK-47", "M9"}
+        local folder = game.Workspace.Prison_ITEMS.giver
+        local plr = game.Players.LocalPlayer
+    
+        for _, v in pairs (guns) do -- loop through the gun table.
+            if folder[v] then
+                folder[v]:MoveTo(plr.Character.HumanoidRootPart.Position) 
+            end
+        end
+    end)
+end
+coroutine.wrap(AKEAFS_fake_script)()
+local function BOMXYM_fake_script() -- BringKeyCard.LocalScript 
+    local script = Instance.new('LocalScript', BringKeyCard)
+ 
+    local button = script.Parent
+    
+    button.MouseButton1Click:Connect(function()
+        local singleFolder = game.Workspace.Prison_ITEMS.single
+    
+        local plr = game.Players.LocalPlayer
+    
+        local Key = singleFolder:FindFirstChild("Key card")
+        if Key and plr.Character then
+            Key:MoveTo(plr.Character.Torso.Position) 
+        else
+            button.Text = "No Key Found!"
+            wait(1)
+            button.Text = "Try Again Later!"
+            wait(2)
+            button.Text = "Bring Key Card"
+        end
+    end)
+end
+coroutine.wrap(BOMXYM_fake_script)()
+local function BOBC_fake_script() -- PrisonBreaker.LocalScript 
+    local script = Instance.new('LocalScript', PrisonBreaker)
+ 
+    local button = script.Parent
+    
+    button.MouseButton1Click:Connect(function()
+        loadstring(game:HttpGet(("https://pastebin.com/raw/hy5PDLVQ"), true))()
+    end)
+end
+coroutine.wrap(BOBC_fake_script)()
+local function XEBZUF_fake_script() -- Exit.LocalScript 
+    local script = Instance.new('LocalScript', Exit)
+ 
+    local exit = script.Parent 
+    local open = script.Parent.Parent.Parent.Parent.Open
+    local mainFrame = script.Parent.Parent.Parent
+    
+    exit.MouseButton1Click:Connect(function()
+        mainFrame.Visible = false
+        exit.Visible = false
+        open.Visible = true
+    end)
+end
+coroutine.wrap(XEBZUF_fake_script)()
+local function OIJXPWH_fake_script() -- MainFrame.LocalScript 
+    local script = Instance.new('LocalScript', MainFrame)
+ 
+    local frame = script.Parent
+    
+    frame.Draggable = true
+    frame.Active = true
+    frame.Selectable = true
+end
+coroutine.wrap(OIJXPWH_fake_script)()
+local function PAAN_fake_script() -- Aimbot.LocalScript 
+    local script = Instance.new('LocalScript', Aimbot)
+ 
+    local button = script.Parent.MouseButton1Click:Connect(function()
+        -- Gui to Lua
+        -- Version: 3.2
+    
+        -- Instances:
+    
+        local ScreenGui = Instance.new("ScreenGui")
+        local Aimbot = Instance.new("Frame")
+        local Title = Instance.new("TextLabel")
+        local Toggle = Instance.new("TextButton")
+    
+        --Properties:
+    
+        ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+        ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    
+        Aimbot.Name = "Aimbot"
+        Aimbot.Parent = ScreenGui
+        Aimbot.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Aimbot.Position = UDim2.new(-0.000408537686, 0, 0.645161271, 0)
+        Aimbot.Size = UDim2.new(0, 116, 0, 132)
+    
+        Title.Name = "Title"
+        Title.Parent = Aimbot
+        Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Title.Size = UDim2.new(0, 116, 0, 45)
+        Title.Font = Enum.Font.SourceSans
+        Title.Text = "Aimbot"
+        Title.TextColor3 = Color3.fromRGB(0, 0, 0)
+        Title.TextScaled = true
+        Title.TextSize = 14.000
+        Title.TextWrapped = true
+    
+        Toggle.Name = "Toggle"
+        Toggle.Parent = Aimbot
+        Toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Toggle.Position = UDim2.new(0, 0, 0.336128026, 0)
+        Toggle.Size = UDim2.new(0, 116, 0, 87)
+        Toggle.Font = Enum.Font.SourceSans
+        Toggle.Text = "Off"
+        Toggle.TextColor3 = Color3.fromRGB(255, 0, 0)
+        Toggle.TextSize = 50.000
+        Toggle.TextWrapped = true
+    
+        -- Scripts:
+    
+        local function YCUCF_fake_script() -- Toggle.LocalScript 
+            local script = Instance.new('LocalScript', Toggle)
+    
+            _G.aimbot = false
+            local camera = game.Workspace.CurrentCamera
+            local localPlayer = game:GetService("Players").LocalPlayer
+    
+            script.Parent.MouseButton1Click:Connect(function()
+                if _G.aimbot == false then
+                    _G.aimbot = true
+                    script.Parent.TextColor3 = Color3.fromRGB(0, 170, 0)
+                    script.Parent.Text = "On"
+                    function closestPlayer()
+                        local dist = math.huge
+                        local target = nil
+                        for i, v in pairs (game:GetService("Players"):GetPlayers()) do
+                            if v ~= localPlayer then
+                                if v.Character and v.Character:FindFirstChild("Head") and v.TeamColor ~= localPlayer.TeamColor and v.Character.Humanoid.Health ~= 0 and _G.aimbot then
+                                    local magnitude = (v.Character.Head.Position - localPlayer.Character.Head.Position).magnitude
+                                    if magnitude < dist then
+                                        dist = magnitude
+                                        target = v
+                                    end
+                                end
+                            end
+                        end
+                        return target
+                    end
+    
+                else
+                    _G.aimbot = false   
+                    script.Parent.TextColor3 = Color3.fromRGB(255, 0, 0)
+                    script.Parent.Text = "Off"
+                end
+            end)
+    
+            local settings = {
+                keybind = Enum.UserInputType.MouseButton2
+            }
+    
+            local uis = game:GetService("UserInputService")
+            local aiming = false
+    
+            uis.InputBegan:Connect(function(input)
+                if input.UserInputType == settings.keybind then
+                    aiming = true   
+                end
+            end)
+    
+            uis.InputEnded:Connect(function(input)
+                if input.UserInputType == settings.keybind then
+                    aiming = false
+                end
+            end)
+    
+            game:GetService("RunService").RenderStepped:Connect(function()
+                if aiming then
+                    camera.CFrame = CFrame.new(camera.CFrame.Position,closestPlayer().Character.Head.Position)
+                end
+            end)
+        end
+        coroutine.wrap(YCUCF_fake_script)()
+    
+    end)
+end
+coroutine.wrap(PAAN_fake_script)()
+local function FQDEGBB_fake_script() -- DexExplorer.LocalScript 
+    local script = Instance.new('LocalScript', DexExplorer)
+ 
+    local button = script.Parent
+    
+    button.MouseButton1Click:Connect(function()
+        loadstring(game:GetObjects("rbxassetid://418957341")[1].Source)()
+    end)
+end
+coroutine.wrap(FQDEGBB_fake_script)()
+local function WBCD_fake_script() -- RemoteSpy.LocalScript 
+    local script = Instance.new('LocalScript', RemoteSpy)
+ 
+    local button = script.Parent
+    
+    button.MouseButton1Click:Connect(function() 
+        loadstring(game:HttpGet(("https://pastebin.com/raw/W08GARrz"), true))()
+    end)
+end
+coroutine.wrap(WBCD_fake_script)()
+local function IXZK_fake_script() -- AddWalkSpeed.LocalScript 
+    local script = Instance.new('LocalScript', AddWalkSpeed)
+ 
+    local button = script.Parent
+    local plr = game.Players.LocalPlayer
+    
+    button.MouseButton1Click:Connect(function()
+        if plr.Character then
+            plr.Character.Humanoid.WalkSpeed = plr.Character.Humanoid.WalkSpeed + 100
+        end
+    end)
+end
+coroutine.wrap(IXZK_fake_script)()
+local function XHTT_fake_script() -- TakeWalkSpeed.LocalScript 
+    local script = Instance.new('LocalScript', TakeWalkSpeed)
+ 
+    local button = script.Parent
+    local plr = game.Players.LocalPlayer
+    
+    button.MouseButton1Click:Connect(function()
+        if plr.Character then
+            plr.Character.Humanoid.WalkSpeed = plr.Character.Humanoid.WalkSpeed - 100
+        end
+    end)
+end
+coroutine.wrap(XHTT_fake_script)()
+local function UDHSILN_fake_script() -- Open.LocalScript 
+    local script = Instance.new('LocalScript', Open)
+ 
+    local mainFrame = script.Parent.Parent.MainFrame
+    local open = script.Parent
+    local exit = script.Parent.Parent.MainFrame.TitleFrame.Exit
+    
+    open.MouseButton1Click:Connect(function()
+        open.Visible = false
+        mainFrame.Visible = true
+        exit.Visible = true
+    end)
+end
+coroutine.wrap(UDHSILN_fake_script)()
+ 
+end)
